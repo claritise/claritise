@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { ThemeProvider } from "~/components/theme-provider";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 import { AppSidebar } from "~/components/sidebar/app-sidebar";
+import { BreadcrumbProvider } from "~/components/header/breadcrumb-context";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -29,8 +30,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>{children}</SidebarInset>
+            <BreadcrumbProvider>
+              <AppSidebar />
+              <SidebarInset>{children}</SidebarInset>
+            </BreadcrumbProvider>
           </SidebarProvider>
         </ThemeProvider>
       </body>
