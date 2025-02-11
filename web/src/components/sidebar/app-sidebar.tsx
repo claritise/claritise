@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Frame, Map, PieChart } from "lucide-react";
+import { FolderGit2, House, Rss } from "lucide-react";
 
 import {
   Sidebar,
@@ -18,17 +18,17 @@ const data = {
     {
       name: "Home",
       url: "/",
-      icon: Frame,
+      icon: House,
     },
     {
-      name: "Dashboard",
-      url: "/dashboard",
-      icon: PieChart,
+      name: "Projects",
+      url: "/projects",
+      icon: FolderGit2,
     },
     {
       name: "Blog",
-      url: "#",
-      icon: Map,
+      url: "/blog",
+      icon: Rss,
     },
   ],
 };
