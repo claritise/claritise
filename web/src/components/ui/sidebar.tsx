@@ -69,10 +69,25 @@ const SidebarProvider = React.forwardRef<
   ) => {
     const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [mounted, setMounted] = React.useState(false);
 
-    // This is the internal state of the sidebar.
-    // We use openProp and setOpenProp for control from outside the component.
+    // Always start with defaultOpen for initial SSR render
     const [_open, _setOpen] = React.useState(defaultOpen);
+
+    // Read cookie after initial render
+    React.useEffect(() => {
+      const cookie = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith(SIDEBAR_COOKIE_NAME));
+      if (cookie) {
+        const savedState = cookie.split("=")[1] === "true";
+        _setOpen(savedState);
+      }
+      setIsLoading(false);
+      setMounted(true);
+    }, []);
+
     const open = openProp ?? _open;
     const setOpen = React.useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
@@ -83,7 +98,6 @@ const SidebarProvider = React.forwardRef<
           _setOpen(openState);
         }
 
-        // This sets the cookie to keep the sidebar state.
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       },
       [setOpenProp, open],
@@ -136,6 +150,11 @@ const SidebarProvider = React.forwardRef<
         toggleSidebar,
       ],
     );
+
+    // Don't render content until we've read the cookie
+    if (isLoading) {
+      return null;
+    }
 
     return (
       <SidebarContext.Provider value={contextValue}>
