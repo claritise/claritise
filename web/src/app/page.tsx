@@ -1,6 +1,8 @@
 import { Github, Twitter, Instagram, Youtube, AtSign } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import { forwardRef } from "react";
+import BreadcrumbSetter from "~/components/header/breadcrumb-setter";
+import Header from "~/components/header/header-main";
 import { TikTokIcon } from "~/components/icons/tiktok-icon";
 
 type SocialLink = {
@@ -43,16 +45,20 @@ const socialLinks: SocialLink[] = [
 ];
 
 export default function HomePage() {
+  const breadcrumbs = [{ name: "Home", href: "/" }];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
+    <main className="flex min-h-screen flex-col">
+      <BreadcrumbSetter breadcrumbs={breadcrumbs} />
+
+      <div className="w-full px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-3xl">
-          <div className="flex flex-1 flex-col gap-4">
-            <section className="rounded-xl bg-muted/50 p-6">
-              <h2 className="mb-4 text-2xl font-semibold text-card-foreground">
+          <div className="flex flex-1 flex-col gap-4 sm:gap-6">
+            <section className="rounded-xl bg-muted/50 p-4 sm:p-6">
+              <h2 className="mb-3 text-xl font-semibold text-card-foreground sm:mb-4 sm:text-2xl">
                 Welcome to My Corner of the Web
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-sm text-muted-foreground sm:text-base">
                 Hello! I&apos;m 𝒶𝓃𝓃𝒶𝑔𝓇𝒶𝓂, a passionate writer, tech enthusiast
                 and ameteur musician. This blog is where I share my thoughts on
                 technology, literature, and life in general as well as music and
@@ -61,11 +67,11 @@ export default function HomePage() {
               </p>
             </section>
 
-            <section className="rounded-xl bg-muted/50 p-6">
-              <h2 className="mb-4 text-2xl font-semibold text-card-foreground">
+            <section className="rounded-xl bg-muted/50 p-4 sm:p-6">
+              <h2 className="mb-3 text-xl font-semibold text-card-foreground sm:mb-4 sm:text-2xl">
                 Connect with Me
               </h2>
-              <div className="flex justify-center space-x-6">
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                 {socialLinks.map((link) => (
                   <a
                     key={link.name}
@@ -74,7 +80,7 @@ export default function HomePage() {
                     rel="noopener noreferrer"
                     className="text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <link.icon className="size-16" />
+                    <link.icon className="size-8 sm:size-12 lg:size-16" />
                     <span className="sr-only">{link.name}</span>
                   </a>
                 ))}

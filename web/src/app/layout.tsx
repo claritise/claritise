@@ -6,6 +6,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 import { AppSidebar } from "~/components/sidebar/app-sidebar";
 import { BreadcrumbProvider } from "~/components/header/breadcrumb-context";
+import Header from "~/components/header/header-main";
 
 export const metadata: Metadata = {
   title: "claritise",
@@ -32,7 +33,11 @@ export default function RootLayout({
           <SidebarProvider>
             <BreadcrumbProvider>
               <AppSidebar />
-              <SidebarInset>{children}</SidebarInset>
+              <SidebarInset>
+                {/* The Header will read from the context */}
+                <Header />
+                {children}
+              </SidebarInset>
             </BreadcrumbProvider>
           </SidebarProvider>
         </ThemeProvider>

@@ -232,7 +232,8 @@ const Sidebar = React.forwardRef<
               } as React.CSSProperties
             }
             side={side}
-            title={""}
+            title="Sidebar Navigation"
+            description="Navigation menu for mobile devices"
           >
             <div className="flex h-full w-full flex-col">{children}</div>
           </SheetContent>
