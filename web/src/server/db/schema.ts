@@ -5,9 +5,11 @@ import { sql } from "drizzle-orm";
 import {
   index,
   integer,
+  jsonb,
   pgTableCreator,
   timestamp,
   varchar,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -27,10 +29,33 @@ export const posts = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
+);
+
+export const blogPosts = createTable(
+  "blog_post",
+  {
+    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    slug: varchar("slug", { length: 256 }).notNull().unique(),
+    title: varchar("title", { length: 256 }).notNull(),
+    content: varchar("content", { length: 20000 }).notNull(),
+    excerpt: varchar("excerpt", { length: 500 }),
+    published: boolean("published").default(false).notNull(),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (table) => ({
+    slugIndex: index("blog_post_slug_idx").on(table.slug),
+    publishedIndex: index("blog_post_published_idx").on(table.published),
+  }),
 );

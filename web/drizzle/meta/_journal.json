@@ -8,6 +8,13 @@
       "when": 1738055235274,
       "tag": "0000_exotic_switch",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739525666924,
+      "tag": "0001_spicy_sentinel",
+      "breakpoints": true
     }
   ]
 }

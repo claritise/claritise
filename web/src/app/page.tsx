@@ -2,7 +2,6 @@ import { Github, Twitter, Instagram, Youtube, AtSign } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import { forwardRef } from "react";
 import BreadcrumbSetter from "~/components/header/breadcrumb-setter";
-import Header from "~/components/header/header-main";
 import { TikTokIcon } from "~/components/icons/tiktok-icon";
 
 type SocialLink = {
