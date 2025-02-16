@@ -7,6 +7,7 @@ import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 import { AppSidebar } from "~/components/sidebar/app-sidebar";
 import { BreadcrumbProvider } from "~/components/header/breadcrumb-context";
 import Header from "~/components/header/header-main";
+import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "claritise",
@@ -24,23 +25,25 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SidebarProvider>
-            <BreadcrumbProvider>
-              <AppSidebar />
-              <SidebarInset>
-                {/* The Header will read from the context */}
-                <Header />
-                {children}
-              </SidebarInset>
-            </BreadcrumbProvider>
-          </SidebarProvider>
-        </ThemeProvider>
+        <TRPCReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SidebarProvider>
+              <BreadcrumbProvider>
+                <AppSidebar />
+                <SidebarInset>
+                  {/* The Header will read from the context */}
+                  <Header />
+                  {children}
+                </SidebarInset>
+              </BreadcrumbProvider>
+            </SidebarProvider>
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

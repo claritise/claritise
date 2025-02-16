@@ -15,6 +15,20 @@
       "when": 1739525666924,
       "tag": "0001_spicy_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739685411673,
+      "tag": "0002_shocking_jean_grey",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1739686979456,
+      "tag": "0003_magenta_midnight",
+      "breakpoints": true
     }
   ]
 }
